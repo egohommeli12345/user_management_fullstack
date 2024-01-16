@@ -1,0 +1,64 @@
+.usermanagementheader {
+    color: white;
+    text-align: center;
+    font-size: 3em;
+    margin-bottom: 0.5em;
+}
+
+.usermanagementbg {
+    position: relative;
+    z-index: 2;
+    background-color: black;
+    opacity: 0.8;
+    overflow: hidden;
+    border-radius: 1em;
+    padding: 3%;
+    height: 80vh;
+    width: 80vw;
+    border: 0.2em solid rgb(160, 160, 160);
+}
+
+.userlist {
+    position: relative;
+    color: white;
+    overflow: scroll;
+    height: 100%;
+}
+
+.listitem {
+    display: grid;
+    margin-top: 1em;
+    background-color: rgb(26, 26, 26);
+    padding: 1em;
+    border-radius: 1em;
+}
+
+.user {
+    display: grid;
+}
+
+.title0,
+.title1,
+.title2,
+.title3 {
+    grid-column: 1;
+    font-weight: bold;
+}
+
+.data0,
+.data1,
+.data2,
+.data3 {
+    grid-column: 2;
+}
+
+.userdel {
+    grid-column: 3;
+    background-color: rgba(255, 0, 0, 0.301);
+    color: white;
+    grid-row: 1 / span 4;
+    border-radius: 1em;
+    margin: 0.5em;
+    width: 30%;
+    justify-self: right;
+}

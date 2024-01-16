@@ -1,0 +1,120 @@
+.loginbg {
+    display: grid;
+    width: 30vw;
+    height: 50vh;
+    min-width: 300px;
+    min-height: 400px;
+    max-width: 500px;
+    max-height: 600px;
+    background-color: black;
+    position: relative;
+    overflow: hidden;
+    border-radius: 2.5em;
+    border: 0.2em solid rgb(160, 160, 160);
+}
+
+.logo {
+    position: relative;
+    top: 40%;
+    width: 80%;
+    justify-self: center;
+}
+
+.inputs {
+    display: grid;
+    height: min-content;
+    row-gap: 1em;
+    margin-top: 6em;
+}
+
+.input {
+    height: 2.5em;
+    background-color: #081b29;
+    color: white;
+    text-align: center;
+    border-radius: 1.5em;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.resetpwLogin {
+    color: rgb(83, 83, 83);
+    text-align: center;
+    width: auto;
+    padding: 0.3em;
+    border-radius: 0.75em;
+    transition: background-color 0.5s;
+}
+
+.resetpwLogin:hover {
+    background-color: white;
+    color: black;
+}
+
+.resetpwAction {
+    justify-self: center;
+    background-color: rgb(126, 0, 0);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    width: auto;
+    padding: 0.3em;
+    border-radius: 0.75em;
+    transition: background-color 0.5s;
+}
+
+.resetpwAction:hover {
+    background-color: rgb(255, 0, 0);
+}
+
+.registerLogin {
+    float: right;
+    color: rgb(83, 83, 83);
+    text-align: center;
+    width: auto;
+    padding: 0.3em;
+    border-radius: 0.75em;
+    transition: background-color 0.5s;
+}
+
+.registerLogin:hover {
+    background-color: white;
+    color: black;
+}
+
+.registerreset {
+    justify-self: center;
+}
+
+.registerAction {
+    justify-self: center;
+    color: white;
+    text-align: center;
+    width: min-content;
+    padding: 0.3em;
+    border-radius: 0.75em;
+    transition: background-color 0.5s;
+}
+
+.registerAction:hover {
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
+
+.loginbtn {
+    justify-self: center;
+    background-color: #081b29;
+    width: 35%;
+    height: 3.5em;
+    border-radius: 1.5em;
+    color: white;
+    transition: background-color 0.5s;
+}
+
+.loginbtn:hover {
+    background-color: #00e6e6;
+    color: black;
+}
