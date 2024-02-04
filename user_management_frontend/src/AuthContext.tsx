@@ -35,9 +35,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
                 });
             } else {
                 setAuthState(initialAuthState);
+                alert("Login failed");
             }
         } catch (error) {
-            console.log(error);
+            alert(error);
             setAuthState(initialAuthState);
         }
     };
