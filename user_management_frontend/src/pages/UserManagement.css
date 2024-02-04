@@ -61,6 +61,21 @@
     grid-row: 1 / span 4;
     border-radius: 1em;
     margin: 0.5em;
-    width: 30%;
+    width: 10em;
     justify-self: right;
+}
+
+.logoutBtn {
+    background-color: rgb(26, 26, 26);
+    color: white;
+    text-align: center;
+    padding: 0.5em;
+    border-radius: 1em;
+    margin-top: 1em;
+    cursor: pointer;
+    transition: ease 0.3s;
+}
+
+.logoutBtn:hover {
+    background-color: rgb(56, 56, 56);
 }
