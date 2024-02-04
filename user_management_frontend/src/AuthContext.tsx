@@ -7,31 +7,39 @@ const initialAuthState: AuthState = {
     token: null,
 };
 
-export const AuthContext = createContext<AuthContextType | undefined>(undefined);
+export const AuthContext = createContext<AuthContextType | undefined>(
+    undefined
+);
 
-export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const AuthProvider: React.FC<{ children: ReactNode }> = ({
+    children,
+}) => {
     const [authState, setAuthState] = useState<AuthState>(initialAuthState);
 
     const login = async (username: string, password: string) => {
         try {
-            const response = await fetch('http://localhost:8080/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password })
+            const response = await fetch("http://localhost:8080/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password }),
             });
 
-            if (response.ok) {
+            if (response.status === 200) {
                 const userId = await response.text();
                 console.log(JSON.stringify({ id: userId }));
 
-                setAuthState({ isAuthenticated: true, user: userId, token: userId });
+                setAuthState({
+                    isAuthenticated: true,
+                    user: userId,
+                    token: userId,
+                });
             } else {
                 setAuthState(initialAuthState);
             }
         } catch (error) {
             console.log(error);
             setAuthState(initialAuthState);
-        };
+        }
     };
 
     const logout = () => {

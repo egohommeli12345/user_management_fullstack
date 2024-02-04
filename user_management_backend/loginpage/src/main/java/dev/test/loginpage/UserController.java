@@ -1,6 +1,8 @@
 package dev.test.loginpage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,7 +16,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/users")
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         System.out.println("getAllUsers() called");
         System.out.println(userService.getAllUsers());
         return userService.getAllUsers();
@@ -27,16 +29,16 @@ public class UserController {
     }
 
     @PostMapping("/addUser")
-    public void addUser(@RequestBody User user){
+    public void addUser(@RequestBody User user) {
         System.out.println("addUser() called");
         userService.addUser(user);
     }
 
     @PostMapping("/login")
-    public String authenticate(@RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<?> authenticate(@RequestBody LoginDTO loginDTO) {
         System.out.println("authenticateUser() called");
         return userService.authenticateUser(loginDTO.getUsername(), loginDTO.getPassword())
-                .map(User::getId)
-                .orElse("Login failed");
+                .map(userId -> ResponseEntity.ok().body(userId))
+                .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null));
     }
 }
