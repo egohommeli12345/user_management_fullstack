@@ -20,8 +20,8 @@ The project is continuously evolving and many of the functionality may be under 
 Has a few basic api endpoints: 
 * GET /users (retrieves all users from the server)
 * GET /help (retrieves a string which shows what info is needed for a new user)
-* POST /addUser (adds a new user do DB based on the info in request body)
-* POST /login (checks the DB for credentials included in request body and responses with userID & 200 if correct, otherwise 401)
+* POST /addUser (adds a new user do DB based on the info in request body, responds with string)
+* POST /login (checks the DB for credentials included in request body and responds with userID & 200 if correct, otherwise 401)
 
 
 ## To/Do:
@@ -30,7 +30,5 @@ Has a few basic api endpoints:
 * /deleteUser endpoint for deleting specified user from the database
 
 ### FRONTEND
-* Completing register form visually
-* Adding fetch POST for /addUser endpoint
 * Adding fetch POST for /deleteUser endpoint
-* Password reset and register button functionality
+* Password reset button functionality
