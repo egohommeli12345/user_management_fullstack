@@ -3,6 +3,8 @@ import "./Login.css";
 import hr_sauli_logo from "/hr_sauli_logoC.png";
 import { useAuth } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
+import { checkForm, registerUserRequest } from "../components/RegisterUser";
+import { RegisterUser } from "../interfaces";
 
 interface ResetPwProps {
     onResetPassword: () => void;
@@ -43,7 +45,7 @@ function Login() {
                 <ResetPassword onResetPassword={handleResetPasswordClick} />
             )}
             {showRegisterUser && (
-                <RegisterUser onRegister={handleRegisterUserClick} />
+                <RegisterUserView onRegister={handleRegisterUserClick} />
             )}
             {!showResetPassword && !showRegisterUser && (
                 <MainScreen
@@ -85,36 +87,6 @@ function MainScreen({
             navigate("/user-management");
         }
     }, [authState.isAuthenticated, navigate]);
-
-    /*   const [data, setData] = useState<User[]>([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-  
-    useEffect(() => {
-      if (isLoginSuccessful) {
-        setLoading(true);
-  
-        fetch("http://localhost:8080/users")
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Failed to fetch data");
-            }
-            return response.json();
-          })
-          .then((data) => {
-            setData(data);
-            setLoading(false);
-            console.log(data);
-          })
-          .catch((error) => {
-            setError(error);
-            setLoading(false);
-          })
-          .finally(() => {
-            setLoading(false);
-          });
-      }
-    }, [isLoginSuccessful]); */
 
     return (
         <div className="loginbg">
@@ -182,39 +154,96 @@ function ResetPassword({ onResetPassword }: ResetPwProps) {
     );
 }
 
-function RegisterUser({ onRegister }: RegisterProps) {
+function RegisterUserView({ onRegister }: RegisterProps) {
+    // UseState for the input fields, default value is an empty string
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+
+    // These functions handle the input changes
+    const handleUsernameChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setUsername(event.target.value);
+    };
+    const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setEmail(event.target.value);
+    };
+    const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setPassword(event.target.value);
+    };
+    const handleConfirmPasswordChange = (
+        event: ChangeEvent<HTMLInputElement>
+    ) => {
+        setConfirmPassword(event.target.value);
+    };
+
+    // When the form is submitted, the registerUser function is called
+    const registerUser = async (event: ChangeEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        console.log(checkForm(username, email, password, confirmPassword));
+
+        const user: RegisterUser = {
+            username: username,
+            email: email,
+            password: password,
+        };
+        if (
+            await registerUserRequest(
+                user,
+                checkForm(username, email, password, confirmPassword)
+            )
+        ) {
+            setUsername("");
+            setEmail("");
+            setPassword("");
+            setConfirmPassword("");
+
+            onRegister();
+        }
+    };
+
     return (
         <div className="loginbg">
             <img className="logo" src={hr_sauli_logo}></img>
-            <div className="inputs">
-                <input
-                    className="input"
-                    type="text"
-                    placeholder="Username"
-                ></input>
-                <input
-                    className="input"
-                    type="text"
-                    placeholder="Email"
-                ></input>
-                <input
-                    className="input"
-                    type="password"
-                    placeholder="Password"
-                ></input>
-                <input
-                    className="input"
-                    type="password"
-                    placeholder="Confirm password"
-                ></input>
-                <button
-                    className="registerAction"
-                    type="button"
-                    onClick={onRegister}
-                >
-                    Register
-                </button>
-            </div>
+            <form onSubmit={registerUser}>
+                <div className="inputs">
+                    <input
+                        className="input"
+                        type="text"
+                        placeholder="Username"
+                        onChange={handleUsernameChange}
+                        value={username}
+                    ></input>
+                    <input
+                        className="input"
+                        type="text"
+                        placeholder="Email"
+                        onChange={handleEmailChange}
+                        value={email}
+                    ></input>
+                    <input
+                        className="input"
+                        type="password"
+                        placeholder="Password"
+                        onChange={handlePasswordChange}
+                        value={password}
+                    ></input>
+                    <input
+                        className="input"
+                        type="password"
+                        placeholder="Confirm password"
+                        onChange={handleConfirmPasswordChange}
+                        value={confirmPassword}
+                    ></input>
+                    <button
+                        className="registerAction"
+                        type="submit"
+                        //onClick={onRegister}
+                    >
+                        Register
+                    </button>
+                </div>
+            </form>
         </div>
     );
 }

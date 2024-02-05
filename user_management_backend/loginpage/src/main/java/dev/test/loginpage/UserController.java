@@ -29,9 +29,10 @@ public class UserController {
     }
 
     @PostMapping("/addUser")
-    public void addUser(@RequestBody User user) {
+    public String addUser(@RequestBody User user) {
         System.out.println("addUser() called");
         userService.addUser(user);
+        return "Registered successfully!";
     }
 
     @PostMapping("/login")
